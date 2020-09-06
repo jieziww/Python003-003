@@ -16,18 +16,18 @@ class DiningPhilosopher(threading.Thread):
         self.times = times #哲学家需要进食的次数
         self.left_fork = forks[self.index]   #左手的叉子
         self.right_fork = forks[(self.index + 1) % 5]    #右手的叉子
-        self.takefoodtimes = 0 #哲学家已经吃的次数
+        self.take_food_times = 0 #哲学家已经吃的次数
 
     def run(self):
-        while self.takefoodtimes < self.times:
+        while self.take_food_times < self.times:
             if waiter.service(self):
                 self.dining()
                 waiter.clean(self)
                 self.thinking()
 
     def dining(self):
-        self.takefoodtimes += 1
-        print (f"哲学家： {self.index} 开始吃第{self.takefoodtimes}次面")
+        self.take_food_times += 1
+        print (f"哲学家： {self.index} 开始吃第{self.take_food_times}次面")
         print (f"哲学家： {self.index} 哲学家吃面登记")
         q.put([self.index,0,3]) # 吃面登记
         print (f"哲学家： {self.index} 面吃完了")
