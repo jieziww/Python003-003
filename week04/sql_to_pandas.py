@@ -17,7 +17,7 @@
 import pandas as pd
 import pymysql
 
-if __name__ == '__main__':\
+if __name__ == '__main__':
 
     sql = "select * from dept_manager;"
     conn = pymysql.connect('127.0.0.1', 'root', 'rj123', 'employees')
