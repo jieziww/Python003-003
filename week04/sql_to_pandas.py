@@ -17,6 +17,7 @@
 import pandas as pd
 import pymysql
 
+
 if __name__ == '__main__':
 
     sql = "select * from dept_manager;"
