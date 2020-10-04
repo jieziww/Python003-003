@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 
 class Animal(metaclass=ABCMeta):
-    sizedict = {'微型': 0,
+    size_dict = {'微型': 0,
                 '小型': 1,
                 '中型': 2,
                 '大型': 3,
@@ -17,12 +17,12 @@ class Animal(metaclass=ABCMeta):
 
     @classmethod
     def cry(cls):
-        print(f'{cls.crysound}')
+        print(f'{cls.cry_sound}')
 
     @property
     def ferocious(self):
         if (self.kind == '食肉' and
-            self.sizedict[self.size] >= self.sizedict['中型'] and
+            self.size_dict[self.size] >= self.size_dict['中型'] and
                 self.characteristic == '凶猛'):
             return True
         else:
@@ -34,14 +34,14 @@ class Animal(metaclass=ABCMeta):
 
 
 class Cat(Animal):
-    crysound = "喵喵~"
+    cry_sound = "喵喵~"
 
     def __init__(self, name, kind, size, characteristic):
         super().__init__(name, kind, size, characteristic)
 
 
 class Dog(Animal):
-    crysound = "汪汪~"
+    cry_sound = "汪汪~"
 
     def __init__(self, name, kind, size, characteristic):
         super().__init__(name, kind, size, characteristic)
