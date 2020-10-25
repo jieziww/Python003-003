@@ -16,9 +16,9 @@ list tuple str dict collections.deque
 """
 
 
-def my_map_yield(fun, *seqs):
+def my_map_yield(func, *seqs):
     for args in zip(*seqs):
-        yield fun(*args)
+        yield func(*args)
 
 
 def my_map_return(func, *seqs):
@@ -28,11 +28,11 @@ def my_map_return(func, *seqs):
     return res
 
 
-def testfun(x, y):
+def testfunc(x, y):
     return x*y
 
 
-def testfun2(x, y, z):
+def testfunc2(x, y, z):
     return x*y*z
 
 
@@ -41,12 +41,12 @@ y = [5, 6, 7, 8]
 z = [1, 3, 4, 5]
 
 
-list(my_map_yield(testfun, x, y))
-list(my_map_return(testfun, x, y))
+list(my_map_yield(testfunc, x, y))
+list(my_map_return(testfunc, x, y))
 
 
-list(my_map_yield(testfun2, x, y, z))
-list(my_map_return(testfun2, x, y, z))
+list(my_map_yield(testfunc2, x, y, z))
+list(my_map_return(testfunc2, x, y, z))
 
 
 """
@@ -68,14 +68,14 @@ def timer(func):
 
 
 @timer
-def testfun(x, y, z):
+def testfunc(x, y, z):
     return x**y**z
 
 
 @timer
-def testfun2(x, y):
+def testfunc2(x, y):
     return x**y
 
 
-testfun(2, 2, 2)
-testfun2(100, 100)
+testfunc(2, 2, 2)
+testfunc2(100, 100)
