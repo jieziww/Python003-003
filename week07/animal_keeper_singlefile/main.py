@@ -3,10 +3,11 @@ from abc import ABCMeta, abstractmethod
 
 class Animal(metaclass=ABCMeta):
     size_dict = {'微型': 0,
-                '小型': 1,
-                '中型': 2,
-                '大型': 3,
-                '巨型': 4}
+                 '小型': 1,
+                 '中型': 2,
+                 '大型': 3,
+                 '巨型': 4}
+
 
     @abstractmethod
     def __init__(self, name, kind, size, characteristic):
@@ -89,6 +90,7 @@ if __name__ == '__main__':
     if have_dog:
         print("动物园有狗")
 
+    # 添加动物测试
     z.add_animal(cat2)
     z.add_animal(dog2)
     z.add_animal(dog1)
