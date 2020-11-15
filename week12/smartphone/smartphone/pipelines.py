@@ -36,7 +36,7 @@ class SmartphonePipeline:
             self.connection.rollback()
             print(f'{sql} 异常：{e}')
 
-        # 删除手机top信息,协助新的采集信息.
+        # 删除手机top信息,立即采集新的信息写入.
         try:
             sql = "TRUNCATE TABLE phone_top10"
             self.cursor.execute(sql)
