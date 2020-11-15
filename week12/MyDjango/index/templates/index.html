@@ -1,0 +1,118 @@
+<!DOCTYPE html >
+<html >
+   <head >
+        <meta charset = "UTF-8" >
+        <meta name = "viewport" content = "width=device-width, initial-scale=1, shrink-to-fit=no" >
+        <title > 什么值得买--手机top10 < /title >
+        <link rel = "stylesheet" href = "static/css/bootstrap.min.css" >
+        <script src = "static/js/jquery.slim.min.js" > </script >
+        <script src = "static/js/bootstrap.min.js" > </script >
+    </head >
+    <body >
+        <nav class = "navbar navbar-dark bg-dark">
+            <a class = "navbar-brand" href="/">首页</a>
+            <form class = "form-inline">
+                <input class = "form-control mr-sm-2" name="q" type="search" placeholder="搜索名称">
+                <input class = "form-control mr-sm-2" name="qt" type="search" placeholder="搜索时间">
+                <button class = "btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form >
+        </nav >
+        <div class = "container">
+            <h3 class = "mt-5 mb-3">什么值得买网24小时智能手机评测Top10--数据表</h3>
+            <table class = "table">
+                <thead class = "thead-light">
+                   <tr >
+                        <th scope = "col" >名称</th>
+                        <th scope = "col" class="text-nowrap">值得</th>
+                        <th scope = "col" class="text-nowrap">不值得</th>
+                        <th scope = "col" class="text-nowrap">收藏数量</th>
+                        <th scope = "col" class="text-nowrap">评论数量</th>
+                        <th scope = "col" class="text-nowrap">舆情平均分</th>
+                        <th scope = "col" class="text-nowrap">更新时间</th>
+                    </tr >
+                </thead >
+                <tbody >
+                    { % for phone in phones % }
+                    <tr >
+                        <td > <a href="{% url 'comments' phoneid=phone.id title=phone.title%}">{{ phone.title }}</a></td>
+                        <td > {{ phone.zhi }}</td>
+                        <td > {{ phone.buzhi }}</td>
+                        <td > {{ phone.star }}</td>
+                        <td > {{ phone.comment }}</td>
+                        <td > {{ phone.avgmark }}</td>
+                        <td > {{ phone.hour }}</td>
+                    </tr >
+                    { % endfor % }
+                </tbody >
+            </table >
+
+            <!-- 图表容器 DOM - ->
+            <div id = "container" style="width: 1000px;height:800px;align:center"></div>
+            <!-- 引入 highcharts.js - ->
+            <script src = "http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
+            <script >
+              // 图表配置
+               var options = {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: '什么值得买网24小时智能手机评测Top10--对比图'
+                    },
+                    xAxis: {
+                        categories: ['值得', '不值得', '收藏', '评论']
+                    },
+                    yAxis: {
+                        title: {
+                            text: '数量'
+                        }
+                    },
+                    series: [
+                    { % for phone in phones % }
+                        {
+                        name: '{{ phone.title }}',
+                        data: [{{phone.zhi }}, {{ phone.buzhi }} , {{ phone.star }}, {{ phone.comment }}]
+                    },
+                    { % endfor % }
+                    ]
+                };
+                // 图表初始化函数
+                var chart = Highcharts.chart('container', options)
+            </script >
+
+            <!-- 图表容器 DOM - ->
+            <div id = "container_mark" style="width: 1000px;height:800px;align:center"></div>
+            <!-- 引入 highcharts.js - ->
+            <script src = "http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
+            <script >
+              // 图表配置
+               var options_mark = {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: '什么值得买网24小时智能手机评测Top10--舆情分析得分'
+                    },
+                    xAxis: {
+                        categories: ['舆情得分']
+                    },
+                    yAxis: {
+                        title: {
+                            text: '得分'
+                        }
+                    },
+                    series: [
+                    { % for phone in phones % }
+                        {
+                        name: '{{ phone.title }}',
+                        data: [{{phone.avgmark}}]
+                    },
+                    { % endfor % }
+                    ]
+                };
+                // 图表初始化函数
+                var chart = Highcharts.chart('container_mark', options_mark)
+            </script >
+        </div >
+    </body >
+</html >
