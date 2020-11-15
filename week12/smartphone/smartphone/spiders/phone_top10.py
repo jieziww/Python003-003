@@ -42,7 +42,6 @@ class PhoneTop10Spider(scrapy.Spider):
             items['mark'] = SnowNLP(items['content']).sentiments
             items['phoneid'] = ID
             yield items
-
         next_links = response.xpath(
             '//*[@id="commentTabBlockNew"]//li[@class="pagedown"]/a/@href').extract()
         if next_links and len(next_links) > 0:

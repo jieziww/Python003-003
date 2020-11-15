@@ -61,7 +61,7 @@ class SmartphonePipeline:
                 self.cursor.execute(sql, tuple(item.values()))
             except Exception as e:
                 self.connection.rollback()
-                print(f"{item}评论信息写入数据库异常：{e}")
+                print(f"评论信息写入数据库异常：{e}")
             return item
 
     def close_spider(self, spider):
